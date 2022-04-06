@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useContext } from "react";
 import { View } from "react-native";
 import { Card } from "react-native-paper";
@@ -28,23 +29,23 @@ export const FoodList = ({ navigation }) => {
     useContext(FoodContext);
 
   return (
-    <View>
+    <View style={{backgroundColor: 'white'}}>
       <Header/>
       <SectionTitle variant="sectionTitle" style={{elevation: 0}}>NOTCO HOPPINESS</SectionTitle>
-      {hoppinessNotCo.map((data) => (
-        <FoodCard foodArray={data} navigation={navigation}/>
+      {hoppinessNotCo.map((data, index) => (
+        <FoodCard key={"notco-" + index} foodArray={data} navigation={navigation}/>
       ))}
       <SectionTitle variant="sectionTitle">HAMBURGUESAS</SectionTitle>
-      {hamburguesas.map((data) => (
-        <FoodCard foodArray={data} navigation={navigation}/>
+      {hamburguesas.map((data, index) => (
+        <FoodCard key={"hamb-" + index} foodArray={data} navigation={navigation}/>
       ))}
       <SectionTitle variant="sectionTitle">SALSAS</SectionTitle>
-      {dipsDeSalsas.map((data) => (
-        <FoodCard foodArray={data} navigation={navigation}/>
+      {dipsDeSalsas.map((data, index) => (
+        <FoodCard key={"salsas-" + index} foodArray={data} navigation={navigation}/>
       ))}
       <SectionTitle variant="sectionTitle">GASEOSAS</SectionTitle>
-      {gaseosas.map((data) => (
-        <FoodCard foodArray={data} navigation={navigation}/>
+      {gaseosas.map((data, index) => (
+        <FoodCard key={"gaseosas-" + index} foodArray={data} navigation={navigation}/>
       ))}
     </View>
   );

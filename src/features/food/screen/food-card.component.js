@@ -6,7 +6,7 @@ import { Text } from "../../../components/typography/text.component";
 
 export const FoodCard = ({foodArray, navigation}) => {
   return (
-    <TouchableOpacity style={{flex:1}} onPress={() => navigation.navigate("FoodDeatil", {foodArray, navigation})}>
+    <TouchableOpacity style={{flex:1}} onPress={() => navigation.navigate("FoodDeatil", {foodArray})}>
     <MainCard>
       <Title variant="cardTitle">{foodArray.title}</Title>
       <DescriptionContainer>

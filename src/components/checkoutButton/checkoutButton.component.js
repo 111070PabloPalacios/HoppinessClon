@@ -1,8 +1,9 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "../typography/text.component";
 import styled from "styled-components/native";
 import { CartContext } from "../../services/cart.context";
+import { AddressContext } from "../../services/address.context";
 
 export const CheckoutButton = ({
   title,
@@ -11,18 +12,20 @@ export const CheckoutButton = ({
   disabled,
   navigation,
   products,
+  address,
+  onPressValue,
 }) => {
   
-  const { setProductList, setProductAmount, setProductTotal } = useContext(CartContext);
+  const { orderMade ,setProductList, setProductAmount, setProductTotal } = useContext(CartContext);
+  //const {currentAddress ,setCurrentAddress, setCurrentNumber} = useContext(AddressContext);
 
  const onPress = () => {
-  navigation.navigate(navigateTo, { navigation });
-  if(products) {
-    setProductList([]);
-    setProductAmount([]);
-    setProductTotal([]);
+  if(address){
+    onPressValue();
   }
- }
+  //console.log(currentAddress);
+  navigation.navigate(navigateTo, { navigation});
+ };
 
   return (
     <View style={{ padding: 20 }}>

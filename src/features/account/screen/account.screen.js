@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Button } from "react-native-paper";

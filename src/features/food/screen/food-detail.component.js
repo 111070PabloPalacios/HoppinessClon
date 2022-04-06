@@ -1,9 +1,8 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { Image, View, TextInput, FlatList } from "react-native";
 import { Text } from "../../../components/typography/text.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { FooterComponent } from "../../../components/footer/footer.component";
-import { Image, View, TextInput, FlatList } from "react-native";
 import { CloseButton } from "../../../components/header/close-window.component";
 import styled from "styled-components";
 import { MainButton } from "../../../components/mainButton/mainButton.component";

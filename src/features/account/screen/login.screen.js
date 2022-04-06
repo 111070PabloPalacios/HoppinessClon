@@ -9,7 +9,47 @@ import { AuthenticationContext } from "../../../services/authentication.context"
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorValue, setErrorValue] = useState("");
+  const [inputColor, setInputColor] = useState("purple");
   const { onLogin, error } = useContext(AuthenticationContext);
+
+  const validate = () => {
+    if(email === ""|| password === ""){
+      if(email === "") {
+        setErrorValue("Se debe ingresar un correo electronico");
+        setInputColor("red");
+      }
+      else 
+      if(password === "") {
+        setErrorValue("Se debe ingresar una contraseña");
+        setInputColor("red");
+      }
+    }
+    else {
+      if(error === "FirebaseError: Firebase: The password is invalid or the user does not have a password. (auth/wrong-password)."){
+        setErrorValue("La contraseña es incorrecta");
+      }
+      else 
+      if(error === "FirebaseError: Firebase: There is no user record corresponding to this identifier. The user may have been deleted. (auth/user-not-found)."){
+        setErrorValue("El E-mail es incorrecto");
+      }
+    }
+
+    onLogin(email, password)
+
+  };
+
+  const updateEmail = (u) => {
+    setEmail(u);
+    setInputColor("purple");
+    setErrorValue("");
+  };
+
+  const updatePassword = (p) => {
+    setPassword(p);
+    setInputColor("purple");
+    setErrorValue("");
+  }
 
   return (
     <>
@@ -23,18 +63,20 @@ export const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <Background>
-        <Input placeholder="E-mail" keyboardType="email-address" value={email} textContentType="emailAdress"
-        onChangeText={(u) => setEmail(u)}/>
+        <Input placeholder="E-mail" keyboardType="email-address" value={email}
+        theme={{colors: {primary: inputColor}}}
+        onChangeText={(u) => updateEmail(u)}/>
         <Spacer position="top" size="large" />
-        <Input placeholder="Contraseña" secureTextEntry value={password} textContentType="password"
-        onChangeText={(p) => setPassword(p)}/>
+        <Input placeholder="Contraseña" secureTextEntry value={password}
+        theme={{colors: {primary: inputColor}}} 
+        onChangeText={(p) => updatePassword(p)}/>
         <Spacer position="top" size="large" />
         <Spacer position="top" size="large" />
-        <AccountButton onPress={() => onLogin(email, password)}>
+        <AccountButton onPress={() => validate()}>
           <Text variant="buttonTitle">INICIAR SESION</Text>
         </AccountButton>
         {
-            error && <Text variant="error">{error}</Text>
+            error && <ErrorText variant="error">{errorValue}</ErrorText>
         }
       </Background>
     </>
@@ -59,4 +101,9 @@ const AccountButton = styled(TouchableOpacity)`
   border-width: 2px;
   border-radius: 50px;
   padding: 10px;
+`;
+
+const ErrorText = styled(Text)`
+  padding: 10px;
+  color: red;
 `;

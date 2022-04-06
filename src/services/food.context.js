@@ -12,25 +12,25 @@ export const FoodContextProvider = ({children}) => {
     const [hamburguesas, setHamburguesas] = useState([]);
     const [dipsDeSalsas, setDipsDeSalsas] = useState([]);
     const [gaseosas, setGaseosas] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const data = () => {
-      setIsLoading(true);
-      setTimeout(() => {
+      //setIsLoading(true);
         if (hoppinessNotCo.length === 0 && hamburguesas.length === 0) {
           FoodService("notcoandhoppiness", setHoppinessNotCo);
           FoodService("hamburguesas", setHamburguesas);
           FoodService("dipsdesalsas", setDipsDeSalsas);
           FoodService("gaseosas", setGaseosas);
-          setIsLoading(false);
         }
-      }, 2000);
+
       };
       console.log(isLoading);
 
       useEffect(() => {
         data();
-       
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 5000);
       }, [])
 
       return (
@@ -39,9 +39,9 @@ export const FoodContextProvider = ({children}) => {
             hoppinessNotCo,
             hamburguesas,
             dipsDeSalsas,
-            gaseosas
-          }}
-          >
+            gaseosas,
+            isLoading
+          }}>
               {children}
           </FoodContext.Provider>
       );

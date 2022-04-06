@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useCallback} from "react";
 import { View } from "react-native";
 import { DropDownList } from "../dropdown/dropdownlist-component";
 import { Text } from "../typography/text.component";
@@ -6,10 +6,29 @@ import styled from "styled-components";
 
 export const Header = () => {
   const dropdownItems = [{ label: "Lo antes posible", value: "antes" }];
+  const [firstDropdownOpen, setFirstDropdownOpen] = useState(false);
+  const [secondDropdownOpen, setSecondDropdownOpen] = useState(false);
   const secondDropDownItems = [
     { label: "Retiro en local", value: "retirolocal" },
     { label: "Delivery", value: "delivery" },
   ];
+
+  const firstDropdownHandler = () => {
+    setSecondDropdownOpen(false);
+    setFirstDropdownOpen(true);
+    //console.log(secondDropdownOpen);
+    if(firstDropdownOpen === true){
+      setFirstDropdownOpen(false);
+    }
+  }
+
+  const secondDropdownHandler = () => {
+    setFirstDropdownOpen(false);
+    setSecondDropdownOpen(true);
+    if(secondDropdownOpen === true){
+      setSecondDropdownOpen(false);
+    }
+  }
 
   return (
     <View>
@@ -25,12 +44,16 @@ export const Header = () => {
         <DropDownList
           values={dropdownItems}
           placeholder="Lo antes posible"
+          dropdownHandler={() => firstDropdownHandler()}
+          isOpen={firstDropdownOpen}
         />
       </DropDownWrapper>
       <DropDownWrapper>
         <DropDownList
           values={secondDropDownItems}
           placeholder={"¿Local o Delivery?"}
+          dropdownHandler={() => secondDropdownHandler()}
+          isOpen={secondDropdownOpen}
         />
       </DropDownWrapper>
     </View>

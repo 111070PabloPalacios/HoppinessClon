@@ -1,24 +1,35 @@
 import React, { useState, useContext, useEffect } from "react";
-import { DropdownContext } from "../../services/dropdown.context";
-import { View } from "react-native"
-import { Text } from "react-native-paper";
 import DropDownPicker from "react-native-dropdown-picker";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import styled from "styled-components/native";
+import { DropdownContext } from "../../services/dropdown.context";
+import { AddressContext } from "../../services/address.context";
 
 export const DropDownList = (props) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState(props.values);
-  const {setDropdownValue} = useContext(DropdownContext);
+  const { dropdownValue, setDropdownValue } = useContext(DropdownContext);
+  const { address, currentAddress } = useContext(AddressContext);
 
-  useEffect(() =>{
+  useEffect(() => {
     setDropdownValue(value);
-  },[value])
+    console.log(open);
+  }, [value]);
+
+  /*if(currentAddress.length === 0 && value === "delivery"){
+    setValue(null);
+  }
+  else
+  if(currentAddress.length > 0 && value === "delivery")
+  {
+    setValue(value);
+  }*/
+
+  //console.log(dropdownValue);
 
   return (
     <DropDown
-      open={open}
+      open={props.isOpen}
       value={value}
       items={items}
       setOpen={setOpen}
@@ -28,18 +39,17 @@ export const DropDownList = (props) => {
       dropDownDirection="BOTTOM"
       zIndex={1000}
       zIndexInverse={7000}
-
       dropDownContainerStyle={{
         width: 260,
         width: 218,
-        elevation: 1
+        elevation: 1,
       }}
+      onPress={() => props.dropdownHandler()}
     />
   );
 };
 
-const DropDown = styled(DropDownPicker).attrs({
-})`
-  width: 70%;
+const DropDown = styled(DropDownPicker).attrs({})`
+  width: 78%;
   border-radius: 20px;
 `;

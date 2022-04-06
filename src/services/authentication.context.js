@@ -44,6 +44,7 @@ export const AuthenticationContextProvider = ({children}) => {
         setIsLoading(true);
         if(password !== repeatedPassword){
             setError("Error: las contraseñas no coinciden");
+            console.log(error);
             return;
         }
         firebase
@@ -51,6 +52,11 @@ export const AuthenticationContextProvider = ({children}) => {
         .createUserWithEmailAndPassword(email,password)
         .then((u) => {
             setUser(u);
+        })
+        .catch((e) => {
+            setIsLoading(false);
+            setError(e.toString());
+            console.log(e.message);
         })
     }
 
