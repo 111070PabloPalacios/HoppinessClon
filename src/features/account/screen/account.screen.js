@@ -30,5 +30,5 @@ const AccountButton = styled(TouchableOpacity)`
     border-color: white;
     border-width: 2px;
     border-radius: 50px;
-    padding: 10px;
+    padding: 3%;
 `;

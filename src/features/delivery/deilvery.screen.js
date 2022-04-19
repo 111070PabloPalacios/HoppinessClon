@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  LogBox
 } from "react-native";
 import { Text } from "../../components/typography/text.component";
 import { Spacer } from "../../components/spacer/spacer.component";
@@ -13,10 +14,11 @@ import { CheckoutButton } from "../../components/checkoutButton/checkoutButton.c
 import { CloseButton } from "../../components/header/close-window.component";
 import styled from "styled-components/native";
 
-export const DeliveryForm = ({ navigation }) => {
+export const DeliveryForm = ({navigation}) => {
   const { address, number ,setAddress, setNumber, currentAddress, currentNumber,setCurrentAddress, setCurrentNumber } = useContext(AddressContext);
   const [floor, setFloor] = useState(null);
 
+  LogBox.ignoreAllLogs();
   const onPressValue = () => {
     setCurrentAddress(address);
     setCurrentNumber(number);
@@ -26,7 +28,7 @@ export const DeliveryForm = ({ navigation }) => {
   //console.log(currentAddress);
 
   const header = (
-    <>
+    <View style={{paddingTop: 50}}>
       <View
         style={{
           alignItems: "center",
@@ -67,21 +69,20 @@ export const DeliveryForm = ({ navigation }) => {
           onChangeText={(n) => setNumber(n)}
         />
       </View>
-    </>
+    </View>
   );
 
   return (
-    <View style={{ paddingTop: 50 }}>
-      <FlatList ListHeaderComponent={header}
-      ListFooterComponent={<CheckoutButton
+    <>
+      <FlatList ListHeaderComponent={header}/>
+      <CheckoutButton
         title="CONTINUAR"
         navigation={navigation}
         navigateTo="FoodScreen"
         disabled={address.length === 0 ? true : false}
         address={address}
         onPressValue={() => onPressValue()}
-      />}
       />
-    </View>
+    </>
   );
 };

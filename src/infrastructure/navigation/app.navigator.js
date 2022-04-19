@@ -10,13 +10,10 @@ import {
 } from "@expo-google-fonts/oswald";
 import { useFonts as UseLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import { FoodDeatil } from "../../features/food/screen/food-detail.component";
 import { CheckoutDetail } from "../../components/detailHeader/checkoutDetail.component";
 import { OrderMade } from "../../features/food/screen/order.component";
 import { DeliveryForm } from "../../features/delivery/deilvery.screen";
-import { AccountScreen } from "../../features/account/screen/account.screen";
-import { LogoutMenu } from "../../features/food/screen/logout.component";
 import { GoToCheckout } from "../../components/detailHeader/checkout.index";
 const Stack = createNativeStackNavigator();
 
@@ -42,10 +39,7 @@ export const AppNavigator = () => {
               <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="FoodScreen" component={FoodScreen} />
                 <Stack.Screen name="FoodDeatil" component={FoodDeatil} />
-                <Stack.Screen
-                  name="CheckoutDetail"
-                  component={CheckoutDetail}
-                />
+                <Stack.Screen name="CheckoutDetail"  component={CheckoutDetail}/>
                 <Stack.Screen name="OrderMade" component={OrderMade} />
                 <Stack.Screen name="DeliveryForm" component={DeliveryForm} />
                 <Stack.Screen name="GoToCheckout" component={GoToCheckout} />

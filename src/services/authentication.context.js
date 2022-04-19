@@ -15,6 +15,8 @@ export const AuthenticationContextProvider = ({children}) => {
     //Autentica el usuario y si existe, carga una sesion existente en vez de
     //crear una nueva
 
+    console.log(isAuthenticated);
+
     firebase.auth().onAuthStateChanged((usr) => {
         if(usr){
             setUser(usr);
@@ -77,6 +79,7 @@ export const AuthenticationContextProvider = ({children}) => {
             user,
             isLoading,
             error,
+            setIsAuthenticated,
             onLogin,
             onRegister,
             onLogout

@@ -11,7 +11,6 @@ export const CheckoutButton = ({
   quantity,
   disabled,
   navigation,
-  products,
   address,
   onPressValue,
 }) => {
@@ -24,7 +23,14 @@ export const CheckoutButton = ({
     onPressValue();
   }
   //console.log(currentAddress);
-  navigation.navigate(navigateTo, { navigation});
+  if(navigation){
+    navigation.navigate(navigateTo, {navigation});
+  }
+  else{
+    navigation.navigate(navigateTo);
+  }
+    
+  
  };
 
   return (

@@ -24,7 +24,7 @@ const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 
-export const FoodList = ({ navigation }) => {
+export const FoodList = ({navigation}) => {
   const { hoppinessNotCo, hamburguesas, dipsDeSalsas, gaseosas } =
     useContext(FoodContext);
 

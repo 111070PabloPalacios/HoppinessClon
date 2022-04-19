@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   TextInput,
@@ -13,10 +13,11 @@ import { CheckoutButton } from "../checkoutButton/checkoutButton.component";
 import { DropdownContext } from "../../services/dropdown.context";
 import { Text } from "../typography/text.component";
 import { Spacer } from "../spacer/spacer.component";
+import {OrderPrices} from "./orderPrices.component";
 import styled from "styled-components/native";
 
 export const CheckoutDetail = ({ navigation }) => {
-  const { productAmount, productList, productTotal } = useContext(CartContext);
+  const { productAmount, productList, productTotal, setAclaracionOrden } = useContext(CartContext);
   const { dropdownValue } = useContext(DropdownContext);
   const { address } = useContext(AddressContext);
   const [total, setTotal] = useState(null);
@@ -36,42 +37,20 @@ export const CheckoutDetail = ({ navigation }) => {
           </ButtonWrapper>
           <Input></Input>
         </View>
-        <View style={{ paddingTop: 40 }}>
-          {productAmount.map((x, i) => (
-            <View key={x + "pr" + i} style={{ paddingBottom: 30 }}>
-              <Text variant="sectionTitle" style={{ position: "absolute" }}>
-                {x}X
-              </Text>
-            </View>
-          ))}
-        </View>
-        <View style={{ top: 122, left: 50, position: "absolute" }}>
-          {productList.map((x) => (
-            <View
-              key={x.key}
-              style={{ paddingBottom: 8, flexDirection: "row" }}
-            >
-              <Text variant="cardTitle">{x.title}</Text>
-            </View>
-          ))}
-        </View>
-        <View style={{ position: "absolute", left: 300, top: 122 }}>
-          {productList.map((x) => (
-            <View style={{ paddingBottom: 8, flexDirection: "row" }}>
-              <Text variant="cardTitle">${x.price}</Text>
-            </View>
-          ))}
-        </View>
+        <OrderPrices productAmount={productAmount} productList={productList}/>
         <Spacer position="top" size="large" />
         <TitlePrices title="SUBTOTAL" total={productTotal} />
         <Spacer position="top" size="large" />
-        <TitlePrices title="COSTO DE ENVIO" total={0} />
+        <TitlePrices title="COSTO DE ENVIO" 
+        total={0} variant={dropdownValue === "delivery" && "delivery"}/>
         <Spacer position="top" size="large" />
         <TitlePrices title="TOTAL" total={productTotal} />
         <Spacer position="top" size="large" />
         <Spacer position="top" size="large" />
         <Text variant="sectionTitle">ACLARACIONES</Text>
-        <TextArea textAlignVertical="top" multiline={true} numberOfLines={4} />
+        <TextArea textAlignVertical="top" multiline={true} numberOfLines={4} 
+        maxLength={150} onChangeText={(t) => setAclaracionOrden(t)}
+        />
       </BodyWrapper>
     </>
   );

@@ -1,31 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
-  Alert,
   Modal,
   View,
   StyleSheet,
-  Text,
-  Pressable,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback,TouchableOpacity
 } from "react-native";
-//import { Text } from "../../../components/typography/text.component";
+import { Text } from "../../../components/typography/text.component";
 import styled from "styled-components/native";
-import { NavigationContainer } from "@react-navigation/native";
-import {
-  createDrawerNavigator,
-  useDrawerStatus,
-} from "@react-navigation/drawer";
-import { AccountScreen } from "../../account/screen/account.screen";
-import { OrderMade } from "./order.component";
-import { TouchableOpacity } from "react-native-gesture-handler";
-const Drawer = createDrawerNavigator();
+import { AuthenticationContext } from "../../../services/authentication.context";
+//import { TouchableOpacity } from "react-native-gesture-handler";
 
 export const LogoutMenu = ({openModal, useModalState}) => {
   const [modalVisible, setModalVisible] = useState(true);
+  const { onLogout } = useContext(AuthenticationContext);
 
   const switchModalState = () => {
     setModalVisible(!modalVisible);
     useModalState(false);
+  };
+
+  const logoutState = () => {
+    setIsAuthenticated(true);
   }
 
   return (
@@ -43,7 +38,9 @@ export const LogoutMenu = ({openModal, useModalState}) => {
         <>
         <View>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <TouchableOpacity style={{borderBottomColor: 'red', borderBottomWidth: 2}} onPress={() => onLogout()}>
+            <Text style={styles.modalText} variant="titleVariant">Cerrar Sesion</Text>
+            </TouchableOpacity>
           </View>
         </View>
         <TouchableWithoutFeedback onPress={() => switchModalState()}>
@@ -86,17 +83,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
   },
   textStyle: {
     color: "white",

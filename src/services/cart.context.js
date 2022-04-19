@@ -6,7 +6,9 @@ export const CartContextProvider = ({children}) => {
     const [productList, setProductList] = useState([]);
     const [productAmount, setProductAmount] = useState([]);
     const [productTotal, setProductTotal] = useState([]);
-    const [orderMade, setOrderMade] = useState(false)
+    const [orderMade, setOrderMade] = useState(false);
+    const [aclaracionComida, setAclaracionComida] = useState(null);
+    const [aclaracionOrden, setAclaracionOrden] = useState(null);
 
     console.log(productTotal);
 
@@ -17,10 +19,14 @@ export const CartContextProvider = ({children}) => {
             productAmount,
             productTotal,
             orderMade,
+            aclaracionComida,
+            aclaracionOrden,
             setProductList,
             setProductAmount,
             setProductTotal,
-            setOrderMade
+            setOrderMade,
+            setAclaracionComida,
+            setAclaracionOrden
         }}
         >
             {children}

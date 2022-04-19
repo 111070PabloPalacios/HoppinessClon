@@ -1,21 +1,28 @@
-import React, {useEffect, useContext} from "react";
+import React, { useEffect, useContext } from "react";
 import { View } from "react-native";
-import { Text } from "react-native-paper";
+//import { Text } from "react-native-paper";
+import { Text } from "../../../components/typography/text.component";
 import { CartContext } from "../../../services/cart.context";
+import { DropdownContext } from "../../../services/dropdown.context";
+import styled from "styled-components/native";
 
 export const OrderMade = () => {
+  const { setOrderMade, setProductList, setProductAmount, setProductTotal } =
+    useContext(CartContext);
+  const {setDropdownValue} = useContext(DropdownContext);
 
-    const {setOrderMade, setProductList, setProductAmount, setProductTotal} = useContext(CartContext);
+  useEffect(() => {
+    setProductList([]);
+    setProductAmount([]);
+    setProductTotal([]);
+    setDropdownValue(null);
+  }, []);
 
-    useEffect(() => {
-        setProductList([]);
-        setProductAmount([]);
-        setProductTotal([]);
-    },[])
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: 'center'}}>
+        <Text variant="titleVariant">Tu orden fue realizada!</Text>
+    </View>
+  );
+};
 
-    return(
-        <View style={{marginTop: 50}}>
-        <Text variant="sectionTitle">Tu orden fue realizada!</Text>
-        </View>
-    );
-}
+const Wrapper = styled(View)``;

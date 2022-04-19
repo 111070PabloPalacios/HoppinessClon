@@ -35,7 +35,7 @@ export const Header = () => {
       <Wrapper>
         <HeaderImage
           source={{
-            uri: "https://scontent.fcor2-2.fna.fbcdn.net/v/t1.6435-9/83468364_2631551470394129_1931006851492921622_n.png?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=-GkGF0VNC08AX9KzDNB&_nc_ht=scontent.fcor2-2.fna&oh=00_AT8AM9B0zE7XbG-ETIkJFofozVF9JmPNnwLgEEFp0UfIGw&oe=622D76A8",
+            uri: "https://scontent.fcor2-2.fna.fbcdn.net/v/t1.6435-9/83468364_2631551470394129_1931006851492921622_n.png?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=rHC-dShSvRcAX_E14Ax&_nc_ht=scontent.fcor2-2.fna&oh=00_AT-s9G8SBMiWrFSV83By1U5N0oxmzT1mFb0sesa8wG_nAw&oe=62789C28",
           }}
         />
         <Text variant="label">Entre 45 y 60 | Sin minimo |</Text>

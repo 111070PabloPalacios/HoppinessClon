@@ -13,23 +13,13 @@ export const DropDownList = (props) => {
 
   useEffect(() => {
     setDropdownValue(value);
+    setOpen(false);
     console.log(open);
   }, [value]);
 
-  /*if(currentAddress.length === 0 && value === "delivery"){
-    setValue(null);
-  }
-  else
-  if(currentAddress.length > 0 && value === "delivery")
-  {
-    setValue(value);
-  }*/
-
-  //console.log(dropdownValue);
-
   return (
     <DropDown
-      open={props.isOpen}
+      open={props.isOpen ? open : props.isOpen}
       value={value}
       items={items}
       setOpen={setOpen}
@@ -40,8 +30,7 @@ export const DropDownList = (props) => {
       zIndex={1000}
       zIndexInverse={7000}
       dropDownContainerStyle={{
-        width: 260,
-        width: 218,
+        width: 250,
         elevation: 1,
       }}
       onPress={() => props.dropdownHandler()}

@@ -1,20 +1,16 @@
 import React, { useEffect, useContext, useState } from "react";
-import { View, FlatList, SafeAreaView, ScrollView, Image } from "react-native";
+import { FlatList, Image, LogBox } from "react-native";
 import styled from "styled-components/native";
 import { Appbar } from "react-native-paper";
-import { Text } from "../../../components/typography/text.component";
-import { DropDownList } from "../../../components/dropdown/dropdownlist-component";
 import { CheckoutButton } from "../../../components/checkoutButton/checkoutButton.component";
 import { FoodList } from "./food-list.component";
-import { FoodDeatil } from "./food-detail.component";
 import { FoodContext } from "../../../services/food.context";
 import { CartContext } from "../../../services/cart.context";
 import { DropdownContext } from "../../../services/dropdown.context";
-import { Header } from "../../../components/header/header.component";
 import { LogoutMenu } from "./logout.component";
-import { DrawerNavigator } from "../../../infrastructure/navigation/app.navigator";
 
-export const FoodScreen = ({ navigation }) => {
+export const FoodScreen = ({navigation}) => {
+  LogBox.ignoreAllLogs();
   const { productList } = useContext(CartContext);
   const { dropdownValue } = useContext(DropdownContext);
   const { isLoading } = useContext(FoodContext);
@@ -52,14 +48,14 @@ export const FoodScreen = ({ navigation }) => {
       </Appbar.Header>
       <LogoutMenu openModal={modalState} useModalState={setModalState}/>
           <FlatList
-            ListFooterComponent={<FoodList navigation={navigation} />}
+            ListFooterComponent={<FoodList navigation={navigation}/>}
           />
           {productList.length > 0 && (
             <CheckoutButton
               title="REALIZAR PEDIDO"
+              navigation={navigation}
               quantity={productList.length}
               disabled={dropdownValue ? false : true}
-              navigation={navigation}
               navigateTo="GoToCheckout"
             />
           )}
